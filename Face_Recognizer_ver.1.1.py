@@ -23,7 +23,6 @@ poiskovik300.title("Face Recognizer ver.1.0")
 poiskovik300.resizable(False, False)
 name = "None"
 
-
 def buttonCallback():
     recognizer = cv.face.LBPHFaceRecognizer_create()
     recognizer.read('face_all.yml')
@@ -74,7 +73,6 @@ def buttonCallback():
     cam.release()
     cv.destroyAllWindows()
 
-
 def NewUser(poiskovik300):
     def getname(poiskovik300):
         global name
@@ -96,7 +94,7 @@ def NewUser(poiskovik300):
                 cv.rectangle(img, (x, y), (x + w, y + h), GREEN, 2)
                 count += 1
                 cv.imwrite(DATASET_PATH + '\\user.' + str(face_id) + '.' + str(count) + '.jpg', gray[y:y + h, x:x + w])
-
+            
             cv.imshow(WIN_NAME, img)
             if (cv.waitKey(100) & 0xff) == 0:
                 pass
@@ -125,6 +123,7 @@ def NewUser(poiskovik300):
             return False
         recognizer.write('NewUserData.yml')
         return True
+        
 
     def buttonCallback():
         recognizer = cv.face.LBPHFaceRecognizer_create()
@@ -174,30 +173,32 @@ def NewUser(poiskovik300):
         cam.release()
         cv.destroyAllWindows()
 
+
+
     os.mkdir(DATASET_PATH)
 
     win = tk.Tk()
     win.geometry('400x200')
-    win.title('Enter Name')
-    win.configure(background='#F0FFF0')
-    t1 = tk.Label(win, text='Enter your name')
-    t1.config(font=('Comic Sans', 17, 'bold'))
+    win.configure(background='#4B0082')
+    t1 = tk.Label(win, text='Введите ваше имя')
+    t1.config(font=('Comic Sans', 10, 'bold'))
     t1.pack()
-
-    button = tk.Button(win, text='Confirm', command=partial(getname, poiskovik300))
-
-    t1.configure(bg='#F0FFF0', bd=1)
-    button.configure(bg='#F5F5DC', bd=1, activebackground='#FFFFE0')
+    
+    button = tk.Button(win, text='Подтвердить', command=partial(getname, poiskovik300))
+    
+    t1.configure(bg='#FFFF00',bd=3)
+    button.configure(bg='#FFD700',bd=3)
     edit = tk.Entry(win, width=40)
     edit.place(x=83)
     edit.place(rely=0.4)
-
-    t1.place(x=108)
-    t1.place(rely=0.1)
-
+    
+    t1.place(x=140)
+    t1.place(rely=0.2)
+    
     button.place(x=160)
     button.place(rely=0.6)
-
+    
+    
     win.rowconfigure(4, weight=1)
     win.columnconfigure(0, weight=1)
     win.columnconfigure(1, weight=0)
@@ -219,28 +220,23 @@ poiskovik300.config(menu=main_menu, background='#4B0082')
 
 
 def check():
-    tk.messagebox.showinfo('About',
-                           'Эта программа выполняет функцию распознавания лица на основе нейронной сети, сделанной с помощью библиотеки OpenCV. В ней две функции: распознавание лица разработчиков и распознавание лица людей, которые могут временно внести себя в базу данных.')
+    tk.messagebox.showinfo('About', 'Эта программа выполняет функцию распознавания лица на основе нейронной сети, сделанной с помощью библиотеки OpenCV. В ней две функции: распознавание лица разработчиков и распознавание лица людей, которые могут временно внести себя в базу данных')
 
-
-file_menu.add_command(label='About', command=check, foreground='#000000')
-
+file_menu.add_command(label='About', command=check, foreground='#FFFFFF')
 
 def clicked():
-    tk.messagebox.showinfo('Developers',
-                           ' Альшов В.Р (aLvttt)\n Пугачёв Н.Я (Keus)\n Шишков М.А (shisu!)\n Пашкевич М.Э (peppik)\n Моняхин С.Д (Luca Changretta)')
+    tk.messagebox.showinfo('Developers', ' Альшов В.Р (aLvttt)\n Пугачёв Н.Я (Keus)\n Шишков М.А (shisu!)\n Пашкевич М.Э (peppik)\n Моняхин С.Д (Luca Changretta)')
 
+file_menu.add_command(label='Developers', command=clicked, foreground='#FFFFFF')
 
-file_menu.add_command(label='Developers', command=clicked, foreground='#000000')
-
-button1 = tk.Button(poiskovik300, text="Our team recognizer", command=buttonCallback, justify=CENTER)
-label_1 = tk.Label(poiskovik300, text="Face Recognizer", fg='#F5F5F5')
-button2 = tk.Button(poiskovik300, text="Recognizer of you", command=partial(NewUser, poiskovik300), justify=CENTER)
+button1 = tk.Button(poiskovik300, text="Our team recognizer", command=buttonCallback)
+label_1 = tk.Label(poiskovik300, text="Face Recognizer")
+button2 = tk.Button(poiskovik300, text="Recognizer of you", command=partial(NewUser, poiskovik300))
 label_1.grid(row=0, column=0, columnspan=3)
 button1.grid(row=1, column=0)
 button2.grid(row=1, column=0)
-label_1.place(x=-63)
-label_1.place(rely=0.1)
+label_1.place(x=30)
+label_1.place(rely=0.2)
 button2.place(x=100)
 button1.place(x=95)
 button1.place(rely=0.7)
@@ -248,10 +244,10 @@ button2.place(rely=0.5)
 poiskovik300.rowconfigure(4, weight=1)
 poiskovik300.columnconfigure(0, weight=1)
 poiskovik300.columnconfigure(1, weight=0)
-main_menu.configure(bg='#F0FFF0')
-file_menu.configure(bg='#F0FFF0')
-poiskovik300.configure(bg='#696969')
-button1.configure(bg='#F5F5DC', bd=1, activebackground='#FFFFE0')
-button2.configure(bg='#F5F5DC', bd=1, activebackground='#FFFFE0')
-label_1.configure(bg='#696969', width=30, height=2, font=('Comic Sans', 17, 'bold'), bd=4, justify=CENTER)
+main_menu.configure(bg='#4B0082')
+file_menu.configure(bg='#4B0082')
+poiskovik300.configure(bg='#4B0082')
+button1.configure(bg='#FFD700', bd=3)
+button2.configure(bg='#FFD700', bd=3)
+label_1.configure(bg='#FFFF00', width=30, height=2, font=('Comic Sans', 10, 'bold'), bd=4)
 poiskovik300.mainloop()
